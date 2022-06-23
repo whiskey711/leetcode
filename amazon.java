@@ -7,16 +7,11 @@ public class amazon{
     public static void main(String[] args){
         int[] arr = new int[]{5,7,1,2,8,4,3};
         //System.out.println(twoSum(arr, 19));
-        int[][] grid = new int[][]{
-            new int[]{0,1,2,3,4},
-            new int[]{24,23,22,21,5},
-            new int[]{12,13,14,15,16},
-            new int[]{11,17,18,19,20},
-            new int[]{10,9,8,7,6}
-        };
-        System.out.println(swimInWater(grid));
-        String string = "01001";
-        String[] strArr = string.split(" ");
+        System.out.println(mol(3.73, 3389, 320));
+    }
+    static double mol(double gravity, double radius, double temp){
+        double ans = (37.5*8.31*temp)/(gravity*radius);
+        return ans;
     }
     static int missNum(int[] arr){
         Arrays.sort(arr);
