@@ -12,15 +12,15 @@ public class array{
         int i = 0; 
         int j = 0;
         int num = 1;
-        for (int k=0; k<n; k+=2){
+        for (int k=0; k<n; k++){
             // go right
-            while (j < n-k){
+            while (j < n-k-1){
                 ans[i][j] = num;
                 num++;
                 j++;
             }
             // go down
-            while (i < n-k){
+            while (i < n-k-1){
                 ans[i][j] = num;
                 num++;
                 i++;
@@ -40,7 +40,7 @@ public class array{
             i++;
             j++;
         }
-         
+        if (n % 2 != 0) ans[n/2][n/2] = num; 
         return ans;
     }
     static int minSubArrLen(int[] nums, int target){
