@@ -4,7 +4,44 @@ public class array{
     public static void main(String[] args){
         int[] nums = new int[]{1,2,3,4,5};
         // System.out.println(removeElement(nums, 2));
-        System.out.println(minSubArrLen(nums, 11));
+        int[][] ans = generateMatrix(5);
+        for (int[] arr : ans) System.out.println(Arrays.toString(arr));
+    }
+    static int[][] generateMatrix(int n){
+        int[][] ans = new int[n][n];
+        int i = 0; 
+        int j = 0;
+        int num = 1;
+        for (int k=0; k<n; k+=2){
+            // go right
+            while (j < n-k){
+                ans[i][j] = num;
+                num++;
+                j++;
+            }
+            // go down
+            while (i < n-k){
+                ans[i][j] = num;
+                num++;
+                i++;
+            }
+            // go left
+            while (j > k){
+                ans[i][j] = num;
+                num++;
+                j--;
+            }
+            // go up
+            while (i > k){
+                ans[i][j] = num;
+                num++;
+                i--;
+            }
+            i++;
+            j++;
+        }
+         
+        return ans;
     }
     static int minSubArrLen(int[] nums, int target){
         int minLen = nums.length+1;
