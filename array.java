@@ -4,59 +4,8 @@ public class array{
     public static void main(String[] args){
         int[] nums = new int[]{1,2,3,4,5};
         // System.out.println(removeElement(nums, 2));
-        MyLinkedList linkls = new MyLinkedList();
-        
     }
-    static class MyLinkedList{
-        public int size;
-        public ListNode dummyHead;
-        public MyLinkedList(){
-            dummyHead = new ListNode(-1);
-            size = 0;
-        }
-        public int get(int index){
-            if (index < 0 || index >= size) return -1;
-            ListNode cur = dummyHead.next;
-            int value = 0;
-            for (int i=0; i<=index; i++){
-                value = cur.val;
-                cur = cur.next;
-            }
-            return value;
-        }
-    }
-    static ListNode removeElementFromLinkls(ListNode head, int val){
-        /*
-        while (head != null && head.val == val) head = head.next;
-        if (head == null) return null;
-        ListNode ans = new ListNode();
-        ListNode prev = new ListNode();
-        ans.next = head;
-        prev.next = head;
-        while (head.next != null){
-            if (head.val == val){
-                prev.next = head.next;
-            }else{
-                prev = head;
-            }
-            head = head.next;
-        }
-        if (head.val == val) prev.next = null;
-        return ans.next;
-        */
-        if (head == null) return head;
-        ListNode dummy = new ListNode(-1, head);
-        ListNode prev = dummy;
-        while (head != null){
-            if (head.val != val){
-                prev = head;
-            }else{
-                prev.next = head.next;
-            }
-            head = head.next;
-        }
-        return dummy.next;
-    }
+
     static int[][] generateMatrix(int n){
         int[][] ans = new int[n][n];
         int i = 0; 
@@ -144,22 +93,5 @@ public class array{
         System.out.println(left + " " + right);
         return left;
     }
-    static class ListNode{
-        int val;
-        ListNode next;
-        ListNode(){}
-        ListNode(int val){
-            this.val = val;
-        }
-        ListNode(int val, ListNode next){
-            this.val = val;
-            this.next = next;
-        }
-    }
-    static void printListnode(ListNode ls){
-        while (ls != null){
-            System.out.println(ls.val);
-            ls = ls.next;
-        }
-    }
+    
 }
