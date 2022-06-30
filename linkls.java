@@ -1,9 +1,42 @@
 public class linkls {
     public static void main(String[] args){
-        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
-        printListnode(head);
-        System.out.println("*");
-        printListnode(reverseRecursive(null, head));
+        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        printListnode(swapPairs(head));
+    }
+    static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        return null;  
+    }
+    static ListNode removeNfromEnd(ListNode head, int n){
+        if (head == null) return head;
+        ListNode dumy = new ListNode(-1, head);
+        ListNode slow = dumy;
+        ListNode fast = head;
+        while (fast.next != null){
+            fast = fast.next;
+            if (n == 1) slow = slow.next;
+            else n--;
+        }
+        slow.next = slow.next.next;
+        return dumy.next;
+    }
+    static ListNode swapPairs(ListNode head){
+        if (head == null) return head;
+        ListNode dummy = new ListNode(-1, head);
+        ListNode prev = dummy;
+        while (head != null){
+            if (head.next != null){
+                ListNode temp = head.next;
+                ListNode after = temp.next;
+                prev.next = temp;
+                temp.next = head;
+                head.next = after;
+                prev = head;
+                head = after;
+            }else{
+                head = head.next;
+            }
+        }
+        return dummy.next;
     }
     static ListNode reverseIterative(ListNode head){
         if (head == null) return head;

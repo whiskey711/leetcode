@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 class Debugger{
     public static void main(String[] args) {
@@ -111,6 +111,7 @@ class Debugger{
         }
         return true;
     }
+    /*
     static void sudokuSovler(char[][] board){
         HashMap<Integer, HashSet<Character>> cols = new HashMap<>();
         HashMap<Integer, HashSet<Character>> rows = new HashMap<>();  
@@ -167,6 +168,7 @@ class Debugger{
         }
         return true;
     }
+    */
     static int[] srhRange(int[] nums, int target){
         int l = 0;
         int r = nums.length-1;

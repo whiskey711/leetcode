@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 class twopoint{
     public static void main(String[] args){
@@ -77,6 +77,7 @@ class twopoint{
         }
         return ans;
     }
+    /*
     static int[] dailyTemperatures(int[] temperatures){
         int[] ans = new int[temperatures.length];
         Stack<Pair<Integer, Integer>> stack = new Stack<>();
@@ -90,6 +91,7 @@ class twopoint{
         ans[temperatures.length-1] = 0;
         return ans;
     }
+    */
     static void countAlphaBet(String s){
         HashMap<String, Integer> dict = new HashMap<>();
         String[] strings = s.split("");
