@@ -1,10 +1,67 @@
 public class linkls {
     public static void main(String[] args){
-        ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-        printListnode(swapPairs(head));
+        ListNode tail = new ListNode(-4);
+        ListNode cycle = new ListNode(2, new ListNode(0, tail));
+        tail.next = cycle;
+        ListNode head = new ListNode(3, cycle);
+        System.out.println(detectCycle(head).val);
+    }
+    static ListNode detectCycle(ListNode head){
+        ListNode dummy = new ListNode(-1, head);
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast){
+                slow = dummy.next;
+                while (slow != fast){
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return fast;        
+            }
+        }
+        return null;
     }
     static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        return null;  
+        int lengthA = 0;
+        int lengthB = 0;
+        ListNode dummyA = new ListNode(-1, headA);
+        ListNode dummyB = new ListNode(-1, headB);
+        while (headA != null){
+            headA = headA.next;
+            lengthA++;
+        }  
+        while (headB != null){
+            headB = headB.next;
+            lengthB++;
+        }
+        headA = dummyA.next;
+        headB = dummyB.next;
+        if (lengthA > lengthB){
+            int lenDiff = lengthA - lengthB;
+            while (lenDiff > 0){
+                headA = headA.next;
+                lenDiff--;
+            }
+        }else{
+            int lenDiff = lengthB - lengthA;
+            while (lenDiff > 0){
+                headB = headB.next;
+                lenDiff--;
+            }
+        }
+        ListNode intersect = null;
+        while (headA != null && headB != null){
+            if (headA == headB){
+                intersect = headA; 
+                break;
+            }
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return intersect;
     }
     static ListNode removeNfromEnd(ListNode head, int n){
         if (head == null) return head;
