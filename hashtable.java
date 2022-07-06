@@ -7,9 +7,72 @@ import java.util.Map;
 
 public class hashtable {
     public static void main(String[] args){
-        int[] nums1 = new int[]{4,9,5};
-        int[] nums2 = new int[]{9,4,9,8,4};
-        System.out.println(isHappy(2));
+        int[] nums = {-1,0,1,2,-1,-4};
+        List<List<Integer>> list = threeSum(nums);
+        for (List<Integer> ls : list) System.out.println(ls);
+    }
+    // not hashing, but two pointers
+    static List<List<Integer>> threeSum(int[] nums){
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+        for (int i=0; i<nums.length; i++){
+            int left = i+1;
+            int right = nums.length-1;
+            while (left < right){
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0){
+                    ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    break;
+                }else if (sum < 0){
+                    left++;
+                }else{
+                    right--;
+                }
+            }
+        }
+        return ans;
+    }
+    static boolean canConstruct(String ransomNote, String magazine){
+        char[] maga = magazine.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (char c : maga){
+            if (map.containsKey(c)) map.put(c, map.get(c)+1);
+            else map.put(c, 1);
+        }
+        char[] ransom = ransomNote.toCharArray();
+        for (char letter : ransom){
+            if (map.containsKey(letter)){
+                int value = map.get(letter) - 1;
+                if (value <= 0) map.remove(letter);
+                else map.put(letter, value);
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
+    static int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4){
+        int count = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i=0; i<nums1.length; i++){
+            for (int j=0; j<nums2.length; j++){
+                int sum = nums1[i] + nums2[j];
+                if (map.containsKey(sum)){
+                    map.put(sum, map.get(sum)+1);
+                }else{
+                    map.put(sum, 1);
+                }
+            }
+        }
+        for (int k=0; k<nums3.length; k++){
+            for (int l=0; l<nums4.length; l++){
+                int sum1 = nums3[k] + nums4[l];
+                if (map.containsKey(-sum1)){
+                    count += map.get(-sum1);
+                }
+            }
+        }
+        return count;
     }
     static int[] twoSum(int[] nums, int target){
         HashMap<Integer, Integer> dict = new HashMap<>();
