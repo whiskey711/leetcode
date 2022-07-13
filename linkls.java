@@ -5,7 +5,7 @@ public class linkls {
         tail.next = cycle;
         ListNode head = new ListNode(3, cycle);
         System.out.println(detectCycle(head).val);
-    }
+    } 
     static ListNode detectCycle(ListNode head){
         ListNode dummy = new ListNode(-1, head);
         ListNode fast = head;
