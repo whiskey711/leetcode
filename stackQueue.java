@@ -13,8 +13,24 @@ import javax.print.attribute.HashAttributeSet;
 
 public class stackQueue {
     public static void main(String[] args){
-        int[] nums = new int[]{1,1,1,2,2,3};
-        System.out.println(Arrays.toString(topKFrequent(nums, 2)));
+        // int[] nums = new int[]{1,1,1,2,2,3};
+        System.out.println(simplifyPath("/../"));
+        
+    }
+    static String simplifyPath(String path){
+        Stack<String> stack = new Stack<>();
+        String[] strarr = path.split("/");
+        for (String str : strarr){
+            if (str.isBlank() || str.equals(".")) continue;
+            if (str.equals("..") && !stack.isEmpty()) stack.pop();
+            else if (!str.equals("..")) stack.push(str);
+        }
+        if (stack.isEmpty()) return "/";
+        String ans = "";
+        for (String ss : stack){
+            ans += "/" + ss;
+        }
+        return ans;
     }
     static int[] topKFrequent(int[] nums, int k){
         int[] ans = new int[k];

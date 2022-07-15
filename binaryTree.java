@@ -12,7 +12,32 @@ public class binaryTree {
         int[] inorder = new int[]{2,3,3,3,1};
         TreeNode root = buildTree(preorder, inorder);
         TreeNode test = new TreeNode(3, new TreeNode(2, null, new TreeNode(3)), new TreeNode(3, null, new TreeNode(1)));
-        System.out.println();
+        List<Integer> ans = preorderTravRecur(root);
+        System.out.println(ans.toString());
+    }
+    static List<Integer> preorderTravIter(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> ans = new ArrayList<>();
+        if (root != null) stack.push(root);
+        while (!stack.isEmpty()){
+            root = stack.pop();
+            ans.add(root.val);
+            if (root.right != null) stack.push(root.right);
+            if (root.left != null) stack.push(root.left);
+        }
+        return ans;
+    }
+    static List<Integer> preorderTravRecur(TreeNode root){
+        if (root == null){
+            return new ArrayList<>();
+        }
+        List<Integer> left = preorderTravRecur(root.left);
+        List<Integer> right = preorderTravRecur(root.right);
+        List<Integer> ans = new ArrayList<>();
+        ans.add(root.val);
+        ans.addAll(left);
+        ans.addAll(right);
+        return ans;
     }
     static int rob(TreeNode root, HashMap<TreeNode, Integer> memo){
         //base case, root has no child
