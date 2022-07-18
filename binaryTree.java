@@ -4,16 +4,86 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        int[] preorder = new int[]{3,2,3,3,1};
-        int[] inorder = new int[]{2,3,3,3,1};
+        int[] preorder = new int[]{1,2,3,4,5};
+        int[] inorder = new int[]{2,1,4,3,5};
         TreeNode root = buildTree(preorder, inorder);
         TreeNode test = new TreeNode(3, new TreeNode(2, null, new TreeNode(3)), new TreeNode(3, null, new TreeNode(1)));
-        List<Integer> ans = preorderTravRecur(root);
-        System.out.println(ans.toString());
+        int ans = maxDepth(root);
+        System.out.println(ans);
+    }
+    static int maxDepth(TreeNode root){
+        if (root == null) return 0;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        int maxDep = 0;
+        while (!que.isEmpty()){
+            int len = que.size();
+            while (len > 0){
+                root = que.poll();
+                if (root.left != null) que.offer(root.left);
+                if (root.right != null) que.offer(root.right);
+                len--;
+            }
+            maxDep++;
+        }
+        return maxDep;
+    }
+    static boolean isSymmetricIter(TreeNode left, TreeNode right){
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(left);
+        stack.push(right);
+        while (!stack.isEmpty()){
+            right = stack.pop();
+            left = stack.pop();
+            if (left != null && right == null) return false;
+            else if (left == null && right != null) return false; 
+            else if (left == null && right == null) continue;
+            else if (left.val != right.val) return false;
+            stack.push(left.left);
+            stack.push(right.right);
+            stack.push(left.right);
+            stack.push(right.left);
+        }
+        return true;
+    }
+    static boolean isSymmetricRecur(TreeNode left, TreeNode right){
+        if (left != null && right == null) return false;
+        else if (left == null && right != null) return false; 
+        else if (left == null && right == null) return true;
+        else if (left.val != right.val) return false;
+        boolean outside = isSymmetricRecur(left.left, right.right);
+        boolean inside = isSymmetricRecur(left.right, right.left);
+        return outside && inside;
+    }
+    static TreeNode invertTree(TreeNode root){
+        if (root == null) return root;
+        TreeNode nleft = invertTree(root.left);
+        TreeNode nright = invertTree(root.right);
+        root.left = nright;
+        root.right = nleft;
+        return root;
+    }
+    static List<List<Integer>> levelOrder(TreeNode root){
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while (!que.isEmpty()){
+            int levelLen = que.size();
+            List<Integer> ls = new ArrayList<>();
+            for (int i=0; i<levelLen; i++){
+                root = que.poll();
+                ls.add(root.val);
+                if (root.left != null) que.offer(root.left);
+                if (root.right != null) que.offer(root.right);
+            }
+            ans.add(ls);
+        }
+        return ans;
     }
     static List<Integer> preorderTravIter(TreeNode root){
         Stack<TreeNode> stack = new Stack<>();
