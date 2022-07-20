@@ -16,6 +16,32 @@ public class binaryTree {
         int ans = maxDepth(root);
         System.out.println(ans);
     }
+    static int countNodes(TreeNode root){
+        if (root == null) return 0;
+        int leftDep = getDepth(root.left);
+        int rightDep = getDepth(root.right);
+        if (leftDep == rightDep){
+            return (1 << leftDep) + countNodes(root.right);
+        }else{
+            return (1 << rightDep) + countNodes(root.left);
+        }
+    }
+    static int getDepth(TreeNode root){
+        int num = 0;
+        while (root != null){
+            root = root.left;
+            num++;
+        }
+        return num;
+    }
+    static int minDepth(TreeNode root){
+        if (root.left == null && root.right == null) return 1;
+        else if (root.left == null) return minDepth(root.right) + 1;
+        else if (root.right == null) return minDepth(root.left) + 1;
+        int leftDep = minDepth(root.left) + 1;
+        int rightDep = minDepth(root.right) + 1;
+        return Math.min(leftDep, rightDep);
+    }
     static int maxDepth(TreeNode root){
         if (root == null) return 0;
         Queue<TreeNode> que = new LinkedList<>();
