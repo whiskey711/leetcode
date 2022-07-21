@@ -9,12 +9,17 @@ import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        int[] preorder = new int[]{1,2,3,4,5};
-        int[] inorder = new int[]{2,1,4,3,5};
-        TreeNode root = buildTree(preorder, inorder);
-        TreeNode test = new TreeNode(3, new TreeNode(2, null, new TreeNode(3)), new TreeNode(3, null, new TreeNode(1)));
-        int ans = maxDepth(root);
-        System.out.println(ans);
+        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4), null), null), new TreeNode(2, new TreeNode(3, new TreeNode(4), null), null));
+        System.out.println(getHeight(root));
+    }
+    static int getHeight(TreeNode root){
+        if (root == null) return 0;
+        int leftHeight = getHeight(root.left);
+        if (leftHeight == -1) return -1;
+        int rightHeight = getHeight(root.right);
+        if (rightHeight == -1) return -1;
+        if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+        else return Math.max(leftHeight, rightHeight) + 1;
     }
     static int countNodes(TreeNode root){
         if (root == null) return 0;
