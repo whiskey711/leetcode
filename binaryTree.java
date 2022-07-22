@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -9,8 +10,43 @@ import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4), null), null), new TreeNode(2, new TreeNode(3, new TreeNode(4), null), null));
-        System.out.println(getHeight(root));
+        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3));
+        System.out.println(treePaths(root));
+    }
+    static int sumOfLeftLeaves(TreeNode root){
+        if (root == null) return 0;
+        TreeNode leftC = root.left;
+        TreeNode rightC = root.right;
+        int ans = 0;
+        //leftC is leaf
+        if (leftC != null && leftC.left == null && leftC.right == null){
+            ans += leftC.val;
+        }
+        //rightC is leaf
+        if (rightC != null && rightC.left == null && rightC.right == null){
+            ans += sumOfLeftLeaves(leftC);
+        }else{
+            ans += sumOfLeftLeaves(leftC) + sumOfLeftLeaves(rightC);
+        }
+        return ans;
+    }
+    static List<String> treePaths(TreeNode root){
+        List<String> ans = new ArrayList<>();
+        if (root.left == null && root.right == null){
+            ans.add(String.valueOf(root.val));
+        }else{
+            List<String> leftSub = treePaths(root.left);
+            List<String> rightSub = treePaths(root.right);
+            for (String lstr : leftSub){
+                String path = root.val + "->" + lstr;
+                ans.add(path);
+            }
+            for (String rstr : rightSub){
+                String path = root.val + "->" + rstr;
+                ans.add(path);
+            }
+        }
+        return ans;
     }
     static int getHeight(TreeNode root){
         if (root == null) return 0;
