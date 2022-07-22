@@ -11,23 +11,20 @@ import java.util.Stack;
 public class binaryTree {
     public static void main(String[] args){
         TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3));
-        System.out.println(treePaths(root));
+        System.out.println(sumOfLeftLeaves(root));
     }
     static int sumOfLeftLeaves(TreeNode root){
+        // root is null
         if (root == null) return 0;
         TreeNode leftC = root.left;
         TreeNode rightC = root.right;
         int ans = 0;
-        //leftC is leaf
         if (leftC != null && leftC.left == null && leftC.right == null){
             ans += leftC.val;
-        }
-        //rightC is leaf
-        if (rightC != null && rightC.left == null && rightC.right == null){
-            ans += sumOfLeftLeaves(leftC);
         }else{
-            ans += sumOfLeftLeaves(leftC) + sumOfLeftLeaves(rightC);
+            ans += sumOfLeftLeaves(leftC);
         }
+        ans += sumOfLeftLeaves(rightC);
         return ans;
     }
     static List<String> treePaths(TreeNode root){
