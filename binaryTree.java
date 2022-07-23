@@ -13,6 +13,17 @@ public class binaryTree {
         TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3));
         System.out.println(sumOfLeftLeaves(root));
     }
+    static int findBottomLeftValue(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while (!que.isEmpty()){
+            root = que.poll();
+            if (root.left != null) que.offer(root.left);
+            if (root.right != null) que.offer(root.right);
+
+        }
+    }
     static int sumOfLeftLeaves(TreeNode root){
         // root is null
         if (root == null) return 0;
