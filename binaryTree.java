@@ -18,11 +18,15 @@ public class binaryTree {
         Queue<TreeNode> que = new LinkedList<>();
         que.offer(root);
         while (!que.isEmpty()){
-            root = que.poll();
-            if (root.left != null) que.offer(root.left);
-            if (root.right != null) que.offer(root.right);
-
+            int len = que.size();
+            while (len > 0){
+                root = que.poll();
+                if (root.right != null) que.offer(root.right);
+                if (root.left != null) que.offer(root.left);
+                len--;
+            }
         }
+        return root.val;
     }
     static int sumOfLeftLeaves(TreeNode root){
         // root is null
