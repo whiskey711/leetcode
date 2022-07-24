@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -10,8 +11,50 @@ import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3));
-        System.out.println(sumOfLeftLeaves(root));
+        TreeNode root = new TreeNode(1, new TreeNode(4), new TreeNode(2, new TreeNode(2), new TreeNode(3)));
+        List<Deque<Integer>> ans = pathSumHelper(root, 5, 0);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        for (Deque<Integer> deq : ans){
+            res.add(new ArrayList<>(deq));
+        }
+        System.out.println(res.toString());
+    }
+    static List<Deque<Integer>> pathSumHelper(TreeNode root, int targetSum, int sum){
+        List<Deque<Integer>> ans = new ArrayList<Deque<Integer>>();
+        if (root == null) return ans;
+        sum += root.val;
+        if (sum == targetSum && root.left == null && root.right == null){
+            Deque<Integer> deq = new LinkedList<>();
+            deq.add(root.val);
+            ans.add(deq);
+            return ans;
+        }
+        List<Deque<Integer>> leftans = pathSumHelper(root.left, targetSum, sum);
+        List<Deque<Integer>> rightans = pathSumHelper(root.right, targetSum, sum);
+        if (!leftans.isEmpty()){
+            for (Deque<Integer> ls : leftans){
+                ls.addFirst(root.val);
+                ans.add(ls);
+            }
+        }
+        if (!rightans.isEmpty()){
+            for (Deque<Integer> ls : rightans){
+                ls.addFirst(root.val);
+                ans.add(ls);
+            }
+        }
+        return ans;
+    }
+    static boolean isPathSum(TreeNode root, int targetSum, int sum){
+        if (root == null) return false;
+        sum += root.val;
+        if (sum == targetSum && root.left == null && root.right == null) return true;
+        if (isPathSum(root.left, targetSum, sum)){
+            return true;
+        }else if (isPathSum(root.right, targetSum, sum)){
+            return true;
+        }
+        return false;
     }
     static int findBottomLeftValue(TreeNode root) {
         if (root == null) return 0;
