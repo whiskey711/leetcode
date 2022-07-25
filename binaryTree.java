@@ -11,13 +11,40 @@ import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        TreeNode root = new TreeNode(1, new TreeNode(4), new TreeNode(2, new TreeNode(2), new TreeNode(3)));
-        List<Deque<Integer>> ans = pathSumHelper(root, 5, 0);
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        for (Deque<Integer> deq : ans){
-            res.add(new ArrayList<>(deq));
+        int[] nums = new int[]{3,2,1,6,0,5};
+        constructMaximumBinaryTree(nums);
+    }
+    static TreeNode constructMaximumBinaryTree(int[] nums) {
+        if (nums.length == 0) return null;
+        int j=0;
+        for (int i=0; i<nums.length; i++){
+            if (nums[j] < nums[i]) j = i;
+        }  
+        TreeNode root = new TreeNode(nums[j]);
+        int[] left = Arrays.copyOfRange(nums, 0, j);
+        int[] right = Arrays.copyOfRange(nums, j+1, nums.length);
+        root.left = constructMaximumBinaryTree(left);
+        root.right = constructMaximumBinaryTree(right); 
+        return root;
+    }
+    static TreeNode constructTree(int[] inorder, int[] postorder){
+        if (postorder.length == 0) return null;
+        TreeNode root = new TreeNode(postorder[postorder.length-1]);
+        int i;
+        for (i=0; i<inorder.length; i++){
+            if (inorder[i] == root.val){
+                break;
+            }
         }
-        System.out.println(res.toString());
+        int[] lefthalfin = Arrays.copyOfRange(inorder, 0, i);
+        int[] righthalfin = Arrays.copyOfRange(inorder, i+1, inorder.length);
+        int[] lefthalfpo = Arrays.copyOfRange(postorder, 0, i);
+        int[] righthalfpo = Arrays.copyOfRange(postorder, i, postorder.length-1);
+        TreeNode leftsub = constructTree(lefthalfin, lefthalfpo);
+        TreeNode rightSub = constructTree(righthalfin, righthalfpo);
+        root.left = leftsub;
+        root.right = rightSub;
+        return root;
     }
     static List<Deque<Integer>> pathSumHelper(TreeNode root, int targetSum, int sum){
         List<Deque<Integer>> ans = new ArrayList<Deque<Integer>>();
