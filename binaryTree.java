@@ -11,8 +11,31 @@ import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        int[] nums = new int[]{3,2,1,6,0,5};
-        constructMaximumBinaryTree(nums);
+        TreeNode root = new TreeNode(3, new TreeNode(1), new TreeNode(5, new TreeNode(4), new TreeNode(6)));
+        System.out.println(isValidBST(root));
+    }
+    static boolean isValidBST(TreeNode root){
+        // inorder trav of tree should be a sorted nums
+        if (root == null) return false;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        stack.push(root);
+        while (!stack.isEmpty()){
+            root = stack.peek();
+            if (root == null){
+                stack.pop();
+                root = stack.pop();
+                if (prev != null && root.val <= prev.val) return false;
+                else prev = root;
+            }else{
+                stack.pop();
+                if (root.right != null) stack.push(root.right);
+                stack.push(root);
+                stack.push(null);
+                if (root.left != null) stack.push(root.left);
+            }
+        }
+        return true;
     }
     static TreeNode constructMaximumBinaryTree(int[] nums) {
         if (nums.length == 0) return null;
