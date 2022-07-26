@@ -14,6 +14,18 @@ public class binaryTree {
         TreeNode root = new TreeNode(3, new TreeNode(1), new TreeNode(5, new TreeNode(4), new TreeNode(6)));
         System.out.println(isValidBST(root));
     }
+    static TreeNode LCA(TreeNode root, TreeNode p, TreeNode q){
+        if (root == null) return null;
+        if (root.val == p.val || root.val == q.val){
+            return root;
+        }
+        TreeNode inleft = LCA(root.left, p, q);
+        TreeNode inright = LCA(root.right, p, q);
+        if (inleft != null && inright != null) return root;
+        else if (inright != null) return inright;
+        if (inleft != null) return inleft;
+        else return null;
+    }
     static boolean isValidBST(TreeNode root){
         // inorder trav of tree should be a sorted nums
         if (root == null) return false;
@@ -329,24 +341,6 @@ public class binaryTree {
         }else{
             return lcaOfBinSrhTree(root.right, p, q);
         }    
-    }
-    static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root != null){
-            if (root.val == p.val || root.val == q.val){
-                return root;           
-            }else{
-                TreeNode left = lowestCommonAncestor(root.left, p, q);
-                TreeNode right = lowestCommonAncestor(root.right, p, q);
-                if (left != null && right != null){
-                    return root;
-                }else if (left != null){
-                    return left;
-                }else if (right != null){
-                    return right;
-                }
-            }
-        }
-        return null;
     }
     static boolean dfs(TreeNode root, TreeNode target){
         if (root == null){
