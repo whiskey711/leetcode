@@ -14,6 +14,29 @@ public class binaryTree {
         TreeNode root = new TreeNode(3, new TreeNode(1), new TreeNode(5, new TreeNode(4), new TreeNode(6)));
         System.out.println(isValidBST(root));
     }
+    static TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode res = root;
+        if (root.val == key){
+            TreeNode rightsub = root.right;
+            TreeNode leftsub = root.left;
+            if (leftsub == null && rightsub == null) res = null;
+            else if (leftsub != null && rightsub == null) res = leftsub;
+            else if (leftsub == null && rightsub != null) res = rightsub;
+            else{
+                TreeNode rightOfLeftsub = leftsub.right;
+                root = leftsub;
+                root.right = rightsub;
+                while (rightsub.left != null){
+                    rightsub = rightsub.left;
+                }
+                rightsub.left = rightOfLeftsub;
+                res = root;
+            }
+        }
+        else if (root.val < key) root.right = deleteNode(root.right, key);
+        else if (root.val > key) root.left = deleteNode(root.left, key);
+        return res;
+    }
     static TreeNode LCA(TreeNode root, TreeNode p, TreeNode q){
         if (root == null) return null;
         if (root.val == p.val || root.val == q.val){
