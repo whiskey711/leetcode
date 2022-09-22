@@ -7,7 +7,22 @@ public class amazon{
     public static void main(String[] args){
         int[] arr = new int[]{5,7,1,2,8,4,3};
         //System.out.println(twoSum(arr, 19));
-        System.out.println(mol(3.73, 3389, 320));
+        //System.out.println(mol(3.73, 3389, 320));
+        System.out.println(reverseString("world"));
+    }
+    static String reverseString(String str){
+        int left = 0;
+        int right = str.length() - 1;
+        String[] arr = str.split("");
+        while (left < right){
+            String temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+        str = String.join("", arr);
+        return str;
     }
     static double mol(double gravity, double radius, double temp){
         double ans = (37.5*8.31*temp)/(gravity*radius);

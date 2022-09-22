@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=Merriweather:wght@300;400;700;900&display=swap');
+
+body{
+    font-family: 'Merriweather';
+}
+h1{
+    font-weight: 900;
+}
+h2{
+    font-weight: 700;
+}
+h3{
+    font-weight: 600;
+}

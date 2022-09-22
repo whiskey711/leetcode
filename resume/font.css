@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=Merriweather:wght@300;400;700;900&display=swap');
+
+/* font-family: 'IBM Plex Serif', serif; */
+/* font-family: 'Noto Serif SC', serif; */
+body{
+    font-family: 'Noto Serif SC', serif;
+}
+h1{
+    font-weight: 900;
+}
+h2{
+    font-weight: 700;
+}
+h3{
+    font-weight: 600;
+}
