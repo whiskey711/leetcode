@@ -11,13 +11,98 @@ import java.util.Stack;
 
 public class binaryTree {
     public static void main(String[] args){
-        TreeNode root = new TreeNode(1, new TreeNode(4), new TreeNode(2, new TreeNode(2), new TreeNode(3)));
-        List<Deque<Integer>> ans = pathSumHelper(root, 5, 0);
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        for (Deque<Integer> deq : ans){
-            res.add(new ArrayList<>(deq));
+        TreeNode root = new TreeNode(3, new TreeNode(1), new TreeNode(5, new TreeNode(4), new TreeNode(6)));
+        System.out.println(isValidBST(root));
+    }
+    static TreeNode deleteNode(TreeNode root, int key) {
+        TreeNode res = root;
+        if (root.val == key){
+            TreeNode rightsub = root.right;
+            TreeNode leftsub = root.left;
+            if (leftsub == null && rightsub == null) res = null;
+            else if (leftsub != null && rightsub == null) res = leftsub;
+            else if (leftsub == null && rightsub != null) res = rightsub;
+            else{
+                TreeNode rightOfLeftsub = leftsub.right;
+                root = leftsub;
+                root.right = rightsub;
+                while (rightsub.left != null){
+                    rightsub = rightsub.left;
+                }
+                rightsub.left = rightOfLeftsub;
+                res = root;
+            }
         }
-        System.out.println(res.toString());
+        else if (root.val < key) root.right = deleteNode(root.right, key);
+        else if (root.val > key) root.left = deleteNode(root.left, key);
+        return res;
+    }
+    static TreeNode LCA(TreeNode root, TreeNode p, TreeNode q){
+        if (root == null) return null;
+        if (root.val == p.val || root.val == q.val){
+            return root;
+        }
+        TreeNode inleft = LCA(root.left, p, q);
+        TreeNode inright = LCA(root.right, p, q);
+        if (inleft != null && inright != null) return root;
+        else if (inright != null) return inright;
+        if (inleft != null) return inleft;
+        else return null;
+    }
+    static boolean isValidBST(TreeNode root){
+        // inorder trav of tree should be a sorted nums
+        if (root == null) return false;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        stack.push(root);
+        while (!stack.isEmpty()){
+            root = stack.peek();
+            if (root == null){
+                stack.pop();
+                root = stack.pop();
+                if (prev != null && root.val <= prev.val) return false;
+                else prev = root;
+            }else{
+                stack.pop();
+                if (root.right != null) stack.push(root.right);
+                stack.push(root);
+                stack.push(null);
+                if (root.left != null) stack.push(root.left);
+            }
+        }
+        return true;
+    }
+    static TreeNode constructMaximumBinaryTree(int[] nums) {
+        if (nums.length == 0) return null;
+        int j=0;
+        for (int i=0; i<nums.length; i++){
+            if (nums[j] < nums[i]) j = i;
+        }  
+        TreeNode root = new TreeNode(nums[j]);
+        int[] left = Arrays.copyOfRange(nums, 0, j);
+        int[] right = Arrays.copyOfRange(nums, j+1, nums.length);
+        root.left = constructMaximumBinaryTree(left);
+        root.right = constructMaximumBinaryTree(right); 
+        return root;
+    }
+    static TreeNode constructTree(int[] inorder, int[] postorder){
+        if (postorder.length == 0) return null;
+        TreeNode root = new TreeNode(postorder[postorder.length-1]);
+        int i;
+        for (i=0; i<inorder.length; i++){
+            if (inorder[i] == root.val){
+                break;
+            }
+        }
+        int[] lefthalfin = Arrays.copyOfRange(inorder, 0, i);
+        int[] righthalfin = Arrays.copyOfRange(inorder, i+1, inorder.length);
+        int[] lefthalfpo = Arrays.copyOfRange(postorder, 0, i);
+        int[] righthalfpo = Arrays.copyOfRange(postorder, i, postorder.length-1);
+        TreeNode leftsub = constructTree(lefthalfin, lefthalfpo);
+        TreeNode rightSub = constructTree(righthalfin, righthalfpo);
+        root.left = leftsub;
+        root.right = rightSub;
+        return root;
     }
     static List<Deque<Integer>> pathSumHelper(TreeNode root, int targetSum, int sum){
         List<Deque<Integer>> ans = new ArrayList<Deque<Integer>>();
@@ -279,24 +364,6 @@ public class binaryTree {
         }else{
             return lcaOfBinSrhTree(root.right, p, q);
         }    
-    }
-    static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root != null){
-            if (root.val == p.val || root.val == q.val){
-                return root;           
-            }else{
-                TreeNode left = lowestCommonAncestor(root.left, p, q);
-                TreeNode right = lowestCommonAncestor(root.right, p, q);
-                if (left != null && right != null){
-                    return root;
-                }else if (left != null){
-                    return left;
-                }else if (right != null){
-                    return right;
-                }
-            }
-        }
-        return null;
     }
     static boolean dfs(TreeNode root, TreeNode target){
         if (root == null){
