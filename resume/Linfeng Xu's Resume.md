@@ -2,12 +2,12 @@
 
 # Linfeng Xu
 - Address: 1549 Granada Crescent, Victoria, British Columbia, V8N 2B8
-- Phone Numer: (778)678-8035
+- Phone Number: (778)678-8035
 - Email: james2012.shun@gmail.com  
 ## Skills
 - Familiar with object-oriented languages like **C#**, **Java** and related techniques like **.Net**, **Spring** framework.
-- Understanding front-end development languages **Html**, **Css**, and **Javascript**.
-- Understanding basic data structures like array, stack, hashmap, etc and related algorithms.
+- Understanding front-end development languages **Html**, **CSS**, and **JavaScript**.
+- Understanding basic data structures like array, stack, hashmap, etc. and related algorithms.
 - Good learner and effective communicator demonstrated by working in the developing team of the telemetry ECG monitoring system at the University of Victoria.
 
 ## Programming Experience
