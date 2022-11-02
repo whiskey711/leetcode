@@ -9,18 +9,18 @@
 
 ## Technical Skills
 C#, .NET, WinForm, Java, Spring Data Jpa, MVC, HTML, CSS, JavaScript, JSON, MySQL, SQLite, Git
-## Other Skills
+### Interests
 Distributed System, Cloud Computing, Machine Learing
 
 ## Technical Experience
 
 #### **Remote ECG Monitoring System**, *University of Victoria*, Jan 2019 - Dec 2021
 
-- Designed software that enables the target user to manage patient information and appointments and perform ECG monitoring remotely.
-- Built server with only **Model** and **Controller** parts to handle requests, and designed various **RESTful API** for clients to access.
-- Developed a **WinForm** application as **View** of the system, and used **.NET** framework in the development of interface.
-- Implemented authentication and authorization for the server to prevent unauthorized access by assigning and examining **JSON Web Token**.
-- Used **ORM** to query and manipulate data from the database using an object-oriented paradigm.
+- Designed a clinical software for the target user that allows remote ECG monitoring of in real time.
+- Built server and database with only **Model** and **Controller** parts, and designed various **RESTful API** for clients to access.
+- Developed **WinForm** client as **View** of the system, and used **.NET** framework in the development of interface.
+- Created authentication and authorization for the server to prevent unsafe access.
+- Used **ORM** to produce **MySQL** queries to perform CRUD operations.
 
 #### **Website Project**, *University of Victoria*, Jan 2018 - Feb 2018
 
