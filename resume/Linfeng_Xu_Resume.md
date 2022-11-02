@@ -12,15 +12,15 @@
 ### Tech Stacks
 C#, .NET, WinForm, Java, Spring Data Jpa, MVC, HTML, CSS, JavaScript, JSON, MySQL, SQLite, Git
 ### Interests
-Distributed System, Cloud Computing, Machine Learing
+Distributed System, Cloud Computing, Machine Learning
 
 ## Programming Experience
 
 ### Remote ECG Monitoring System, *University of Victoria*, Jan 2019 - Dec 2021
 
-- Designed a clinical software for the target user that allows remote ECG monitoring of in real time.
+- Designed a clinical software for the target user that allows remote ECG monitoring in real time.
 - Built server and database with only **Model** and **Controller** parts, and designed various **RESTful API** for clients to access.
-- Developed **WinForm** client as **View** of the system, and used **.NET** framework in the development of interface.
+- Developed a **WinForm** client as **View** of the system, and used **.NET** framework in the development of interface.
 - Created authentication and authorization for the server to prevent unsafe access.
 - Used **ORM** to produce **MySQL** queries to perform CRUD operations.
 
