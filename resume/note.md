@@ -36,3 +36,8 @@
 # CDW
 1. rebecca.chen@cdw.ca
 2. https://www.linkedin.com/in/rebecca-chen-0120251b0/  
+
+# Amazon
+1. https://www.linkedin.com/in/chrissmith42/
+3. https://ca.linkedin.com/in/john-sastrillo-3996a3155
+4. 
