@@ -40,4 +40,5 @@
 # Amazon
 1. https://www.linkedin.com/in/chrissmith42/
 3. https://ca.linkedin.com/in/john-sastrillo-3996a3155
-4. 
+4. https://chime.aws/1589207817
+5. mailto:sde-university-applicants@amazon.com
